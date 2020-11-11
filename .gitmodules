@@ -4,3 +4,6 @@
 [submodule "IWA-Microservice-Proximity"]
 	path = IWA-Microservice-Proximity
 	url = git@github.com:PepitoSama/IWA-Microservice-Proximity.git
+[submodule "IWA-Microservice-MVC"]
+	path = IWA-Microservice-MVC
+	url = git@github.com:PepitoSama/IWA-Microservice-MVC.git
