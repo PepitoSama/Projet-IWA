@@ -5,8 +5,15 @@ CREATE DATABASE covid_alert;
 
 CREATE TABLE users(
     user_id serial NOT NULL PRIMARY KEY,
-    username varchar(30) NOT NULL,
-    password varchar(100) NOT NULL
+    username varchar(50) NOT NULL,
+    password varchar(100) NOT NULL,
+    enabled boolean NOT NULL DEFAULT VALUE false
+);
+
+CREATE TABLE authorities (
+    authority_id serial primary key,
+    username varchar(50) NOT NULL REFERENCES users (username),
+    authority varchar(50) NOT NULL DEFAULT 'ROLE_USER'
 );
 
 CREATE TABLE geolocation(
