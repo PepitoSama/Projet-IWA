@@ -5,7 +5,7 @@ CREATE DATABASE covid_alert;
 
 CREATE TABLE users(
     user_id serial NOT NULL PRIMARY KEY,
-    username varchar(50) NOT NULL,
+    username varchar(50) NOT NULL UNIQUE,
     password varchar(100) NOT NULL,
     enabled boolean NOT NULL DEFAULT FALSE
 );
@@ -19,8 +19,8 @@ CREATE TABLE authorities (
 CREATE TABLE geolocation(
     user_id serial NOT NULL REFERENCES users (user_id),
     geolocation_timestamp timestamp without time zone NOT NULL,
-    latitude numeric(18, 16) NOT NULL,
-    longitude numeric(18, 16) NOT NULL,
+    latitude NUMERIC NOT NULL,
+    longitude NUMERIC NOT NULL,
     PRIMARY KEY(user_id, geolocation_timestamp)
 );
 
@@ -38,6 +38,9 @@ CREATE TABLE alert (
     date_alert timestamp without time zone,
     PRIMARY KEY(user_alerted_id, user_infected_id, date_alert)
 );
+
+ALTER SEQUENCE users_user_id_seq RESTART WITH 1
+
 
 insert into users (username, password) values ('sbramble0', 'yp2ScB');
 insert into users (username, password) values ('pborrie1', '7S255A');
