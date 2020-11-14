@@ -7,7 +7,7 @@ CREATE TABLE users(
     user_id serial NOT NULL PRIMARY KEY,
     username varchar(50) NOT NULL,
     password varchar(100) NOT NULL,
-    enabled boolean NOT NULL DEFAULT VALUE false
+    enabled boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE authorities (
