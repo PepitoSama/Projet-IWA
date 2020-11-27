@@ -4,33 +4,50 @@ CREATE DATABASE covid_alert;
 \c covid_alert;
 
 CREATE TABLE users(
-    user_id serial NOT NULL PRIMARY KEY,
-    username varchar(30) NOT NULL,
-    password varchar(100) NOT NULL
+    username varchar(50) NOT NULL PRIMARY KEY,
+    password varchar(100) NOT NULL,
+    enabled boolean NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE persistent_logins(
+ username varchar(50) NOT NULL 
+          REFERENCES users (username),
+ series varchar(64) PRIMARY KEY,
+ token varchar(64) NOT NULL,
+ last_user timestamp NOT NULL
+);
+
+CREATE TABLE authorities (
+    authority_id serial primary key,
+    username varchar(50) NOT NULL REFERENCES users (username),
+    authority varchar(50) NOT NULL DEFAULT 'ROLE_USER'
 );
 
 CREATE TABLE geolocation(
-    user_id serial NOT NULL REFERENCES users (user_id),
+    username varchar(50) NOT NULL REFERENCES users (username),
     geolocation_timestamp timestamp without time zone NOT NULL,
-    latitude numeric(18, 16) NOT NULL,
-    longitude numeric(18, 16) NOT NULL,
-    PRIMARY KEY(user_id, geolocation_timestamp)
+    latitude NUMERIC NOT NULL,
+    longitude NUMERIC NOT NULL,
+    PRIMARY KEY(username, geolocation_timestamp)
 );
 
 CREATE TABLE infected(
-    user_id integer NOT NULL REFERENCES users (user_id),
+    username varchar(50) NOT NULL REFERENCES users (username),
     date_start_infected timestamp without time zone NOT NULL,
     date_end_infected timestamp without time zone,
     contact boolean,
-    PRIMARY KEY(user_id, date_start_infected)
+    PRIMARY KEY(username, date_start_infected)
 );
 
 CREATE TABLE alert (
-    user_alerted_id serial NOT NULL REFERENCES users (user_id),
-    user_infected_id serial NOT NULL REFERENCES users (user_id),
+    user_alerted_username varchar(50) NOT NULL REFERENCES users (username),
+    user_infected_username varchar(50) NOT NULL REFERENCES users (username),
     date_alert timestamp without time zone,
-    PRIMARY KEY(user_alerted_id, user_infected_id, date_alert)
+    PRIMARY KEY(user_alerted_username, user_infected_username, date_alert)
 );
+
+ALTER SEQUENCE users_user_id_seq RESTART WITH 1
+
 
 insert into users (username, password) values ('sbramble0', 'yp2ScB');
 insert into users (username, password) values ('pborrie1', '7S255A');
