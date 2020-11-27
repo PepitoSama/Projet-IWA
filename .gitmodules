@@ -7,3 +7,6 @@
 [submodule "IWA-Microservice-MVC"]
 	path = IWA-Microservice-MVC
 	url = git@github.com:PepitoSama/IWA-Microservice-MVC.git
+[submodule "polytech.ADCE.User"]
+	path = polytech.ADCE.User
+	url = https://github.com/AnthonyDupre98/polytech.ADCE.User.git
