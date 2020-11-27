@@ -10,3 +10,6 @@
 [submodule "polytech.ADCE.User"]
 	path = polytech.ADCE.User
 	url = https://github.com/AnthonyDupre98/polytech.ADCE.User.git
+[submodule "IWA-Microservices-Infection"]
+	path = IWA-Microservices-Infection
+	url = git@github.com:ChristopheTrannoy/IWA-Microservices-Infection.git
